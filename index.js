@@ -18,8 +18,6 @@ app.get('/', (req, res) => {
     <h2>Find your new obsession</h2>`);
 });
 
-app.get('/movies', (req, res) => {
-    res.json(topTen);
-});
+app.get('/movies', (req, res) => res.json(topTen));
 
 app.listen(PORT, () => console.log(`App is listening on port ${PORT}.`));
