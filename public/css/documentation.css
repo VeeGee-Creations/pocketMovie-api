@@ -1,0 +1,21 @@
+table, th, td {
+    border: 1px solid black;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+}
+
+#code-title {
+    margin-bottom: 0;
+}
+
+#code {
+    display: inline-block;
+    font-family: Consolas,"courier new";
+    color: crimson;
+    background-color: #f1f1f1;
+    padding: 2px;
+    font-size: 105%;
+}

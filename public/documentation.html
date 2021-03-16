@@ -4,14 +4,82 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/documentation.css">
     <title>Documentation</title>
 </head>
 <body>
-    <h1>Current Endpoints</h1>
-    <h2>
-        /</br>
-        /movies</br>
-        /documentation.html</br>
-    </h2>
+    <h1>Documentation</h1>
+    <table>
+        <tr>
+            <th>Endpoint</th>
+            <th>Request</th>
+            <th>URL</th>
+            <th>Response</th>
+        </tr>
+        <tr>
+            <td>/</td>
+            <td>GET</td>
+            <td><a href="http://localhost:8080" target="_blank">localhost:8080</a></td>
+            <td>Static HTML</td>
+        </tr>
+        <tr>
+            <td>/documentation</td>
+            <td>GET</td>
+            <td><a href="http://localhost:8080/documentation" target="_blank">http://localhost:8080/documentation</a></td>
+            <td>Static HTML</td>
+        </tr>
+        <tr>
+            <td>/movies</td>
+            <td>GET</td>
+            <td><a href="http://localhost:8080/movies" target="_blank">http://localhost:8080/movies</a></td>
+            <td>JSON</td>
+        </tr>
+        <tr>
+            <td>/featured</td>
+            <td>GET</td>
+            <td><a href="http://localhost:8080/featured" target="_blank">http://localhost:8080/featured</a></td>
+            <td>JSON</td>
+        </tr>
+    </table>
+
+    <h2 id="code-title">Get Movies Example Response</h2>
+    <div id="code">
+<pre>
+<code>
+[
+    {
+        "title": "The Princess Bride",
+        "year": "1987",
+        "directors": [
+            "Rob Reiner"
+        ],
+        "genres": [
+            "Adventure",
+            "Family",
+            "Fantasy"
+        ],
+        "synopsis": "While home sick in bed, a young boy's grandfather reads him the story of a farmboy-turned-pirate who encounters numerous obstacles, enemies and allies in his quest to be reunited with his true love.",
+        "cover": "public/covers/the-princess-bride.jpg",
+        "featured": true
+    },
+    {
+        "title": "The Hitchhiker's Guide to the Galaxy",
+        "year": "2005",
+        "directors": [
+            "Garth Jennings"
+        ],
+        "genres": [
+            "Adventure",
+            "Comedy",
+            "Sci-Fi"
+        ],
+        "synopsis": "Mere seconds before the Earth is to be demolished by an alien construction crew, journeyman Arthur Dent is swept off the planet by his friend Ford Prefect, a researcher penning a new edition of \"The Hitchhiker's Guide to the Galaxy.\"",
+        "cover": "public/covers/hitchhikers-guide-to-the-galaxy.jpg",
+        "featured": true
+    }
+]
+</code>
+</pre>
+    </div>
 </body>
 </html>
