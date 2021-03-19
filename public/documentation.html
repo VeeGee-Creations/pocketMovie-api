@@ -9,41 +9,123 @@
 </head>
 <body>
     <h1>Documentation</h1>
+    <h2>Get Endpoints</h2>
     <table>
         <tr>
             <th>Endpoint</th>
-            <th>Request</th>
+            <th>Method</th>
             <th>URL</th>
             <th>Response</th>
+            <th>Parameters</th>
         </tr>
         <tr>
             <td>/</td>
             <td>GET</td>
             <td><a href="http://localhost:8080" target="_blank">localhost:8080</a></td>
             <td>Static HTML</td>
+            <td>N/A</td>
         </tr>
         <tr>
             <td>/documentation</td>
             <td>GET</td>
             <td><a href="http://localhost:8080/documentation" target="_blank">http://localhost:8080/documentation</a></td>
             <td>Static HTML</td>
+            <td>N/A</td>
         </tr>
         <tr>
             <td>/movies</td>
             <td>GET</td>
             <td><a href="http://localhost:8080/movies" target="_blank">http://localhost:8080/movies</a></td>
             <td>JSON</td>
+            <td>/:title</td>
         </tr>
         <tr>
             <td>/featured</td>
             <td>GET</td>
             <td><a href="http://localhost:8080/featured" target="_blank">http://localhost:8080/featured</a></td>
             <td>JSON</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>/directors</td>
+            <td>GET</td>
+            <td><a href="http://localhost:8080/directors" target="_blank">http://localhost:8080/directors</a></td>
+            <td>JSON</td>
+            <td>/:name</td>
+        </tr>
+        <tr>
+            <td>/users</td>
+            <td>GET</td>
+            <td><a href="http://localhost:8080/users" target="_blank">http://localhost:8080/users</a></td>
+            <td>JSON</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>/favorites</td>
+            <td>GET</td>
+            <td><a href="http://localhost:8080/favorites" target="_blank">http://localhost:8080/favorites</a></td>
+            <td>JSON</td>
+            <td>/:id</td>
         </tr>
     </table>
 
-    <h2 id="code-title">Get Movies Example Response</h2>
-    <div id="code">
+    <h2>Put Endpoints</h2>
+    <table>
+        <tr>
+            <th>Endpoint</th>
+            <th>Method</th>
+            <th>URL</th>
+            <th>Response</th>
+            <th>Parameters</th>
+        </tr>
+        <tr>
+            <td>/favorites</td>
+            <td>PUT</td>
+            <td><a href="http://localhost:8080/favorites" target="_blank">http://localhost:8080/favorites</a></td>
+            <td>String</td>
+            <td>/:id/:title</td>
+        </tr>
+        <tr>
+            <td>/users</td>
+            <td>PUT</td>
+            <td><a href="http://localhost:8080/users" target="_blank">http://localhost:8080/users</a></td>
+            <td>String</td>
+            <td>/:name/:newName</td>
+        </tr>
+    </table>
+
+    <h2>Post and Delete Endpoints</h2>
+    <table>
+        <tr>
+            <th>Endpoint</th>
+            <th>Method</th>
+            <th>URL</th>
+            <th>Response</th>
+            <th>Parameters</th>
+        </tr>
+        <tr>
+            <td>/users</td>
+            <td>POST</td>
+            <td><a href="http://localhost:8080/users" target="_blank">http://localhost:8080/users</a></td>
+            <td>String</td>
+            <td>
+                {
+                    "name",
+                    "email"
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>/users</td>
+            <td>DELETE</td>
+            <td><a href="http://localhost:8080/users" target="_blank">http://localhost:8080/users</a></td>
+            <td>String</td>
+            <td>/:email</td>
+        </tr>
+    </table>
+
+    <h2>Get Movies Example Response</h2>
+    <div class="code">
 <pre>
 <code>
 [
@@ -51,7 +133,7 @@
         "title": "The Princess Bride",
         "year": "1987",
         "directors": [
-            "Rob Reiner"
+            "http://localhost:8080/directors/Rob%20Reiner"
         ],
         "genres": [
             "Adventure",
@@ -59,27 +141,56 @@
             "Fantasy"
         ],
         "synopsis": "While home sick in bed, a young boy's grandfather reads him the story of a farmboy-turned-pirate who encounters numerous obstacles, enemies and allies in his quest to be reunited with his true love.",
-        "cover": "public/covers/the-princess-bride.jpg",
-        "featured": true
-    },
-    {
-        "title": "The Hitchhiker's Guide to the Galaxy",
-        "year": "2005",
-        "directors": [
-            "Garth Jennings"
-        ],
-        "genres": [
-            "Adventure",
-            "Comedy",
-            "Sci-Fi"
-        ],
-        "synopsis": "Mere seconds before the Earth is to be demolished by an alien construction crew, journeyman Arthur Dent is swept off the planet by his friend Ford Prefect, a researcher penning a new edition of \"The Hitchhiker's Guide to the Galaxy.\"",
-        "cover": "public/covers/hitchhikers-guide-to-the-galaxy.jpg",
+        "cover": "http://localhost:8080/public/covers/the-princess-bride.jpg",
         "featured": true
     }
 ]
 </code>
 </pre>
     </div>
+
+    <h2>Get Directors Example Response</h2>
+    <div class="code">
+<pre>
+<code>
+[
+    {
+        "name": "Rob Reiner",
+        "born": "1947",
+        "died": false,
+        "bio": "Robert Reiner was born in New York City, to Estelle Reiner (née Lebost) and Emmy-winning actor, comedian, writer, and producer Carl Reiner.\n\n        As a child, he often looked up to his father as his inspiration and role-model. Carl Reiner was on The Dick Van Dyke Show, which he created and also starred in. Estelle was the inspiration for Rob Reiner to become a director. Her history as a singer helped him understand how music was used in a scene. Rob often felt pressured about measuring up to his father's twelve Emmys, and prestigious awards and successful streak.\n        \n        When Rob graduated high school, his parents advised him to participate in Summer Theatre. Reiner got a job as an apprentice in the Bucks County Playhouse in Pennsylvania. He went to be further educated at UCLA Film School. Reiner felt he still wasn't successful even having a recurring role on one of the biggest shows in the country, All in the Family. Reiner began his directing career with the Oscar-nominated films This Is Spinal Tap, Stand By Me, and The Princess Bride,.\n        \n        With these successful box-office movies in 1987, Reiner founded his own production company, Castle Rock Entertainment, along with Martin Shafer, Andrew Scheinman, Glenn Padnick, and Alan Horn. For Castle Rock Entertainment, he went to direct the Oscar-nominated films When Harry Met Sally, Misery, and A Few Good Men. Reiner often credits former co-star Carroll O'Connor in helping him get into the directing business, and showing Reiner the ropes.\n        \n        Reiner also is known as a political activist, co-founding the American Foundation For Equal Rights, a group that was an advisory for same-sex-marriage. Reiner has spoken at several rallies on several controversial topics, and is also seen as an advocate on social issues, such as domestic violence and tobacco use.\n        \n        Reiner has also made cameos on show like 30 Rock, The Simpsons, and Hannah Montana, and in the films The First Wives Club, Bullets Over Broadway, Primary Colors, and Throw Momma From The Train, among many others."
+    }
+]
+</code>
+</pre>
+    </div>
+
+    <h2>Get Users Example Response</h2>
+    <div class="code">
+<pre>
+<code>
+[
+    {
+        "id": "0aee6973-faed-463a-acea-5f33ea556182",
+        "name": "watcher",
+        "email": "watcher@email.com"
+    }
+]
+</code>
+</pre>
+    </div>
+
+    <h2>String Responses</h2>
+    <p>
+        String responses will announce either the current issue or the success of your request. All requests are accompanied by a corresponding HTML status code.</br></br>
+        Example 1: Odd Thomas added to your favorites.</br>
+        Example 2: The username "watcher" is already taken.
+    </p>
+
+    <h2>PUT to favorites</h2>
+    <p>
+        If you PUT a movie title to your favorites list that does not already exist in the list, it will be saved to favorites.</br>
+        PUT that movie to your favorites again to remove it from the list. This functions like a toggle.
+    </p>
 </body>
 </html>

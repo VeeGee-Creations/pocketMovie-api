@@ -3,7 +3,7 @@ const movies = [
         "title": "Coming 2 America",
         "year": "2021",
         "directors": [
-            "Craig Brewer"
+            "http://localhost:8080/directors/Craig%20Brewer"
         ],
         "genres": [
             "Comedy"
@@ -16,10 +16,10 @@ const movies = [
         "title": "Raya and the Last Dragon",
         "year": "2021",
         "directors": [
-            "Don Hall",
-            "Carlos Lopez Estrada",
-            "Paul Briggs",
-            "John Ripa"
+            "http://localhost:8080/directors/Don%20Hall",
+            "http://localhost:8080/directors/Carlos%20López%20Estrada",
+            "http://localhost:8080/directors/Paul%20Briggs",
+            "http://localhost:8080/directors/John%20Ripa"
         ],
         "genres": [
             "Animation",
@@ -34,7 +34,7 @@ const movies = [
         "title": "Coming to America",
         "year": "1988",
         "directors": [
-            "John Landis"
+            "http://localhost:8080/directors/John%20Landis"
         ],
         "genres": [
             "Comedy",
@@ -48,7 +48,7 @@ const movies = [
         "title": "Zack Snyder's Justice League",
         "year": "2021",
         "directors": [
-            "Zack Snyder"
+            "http://localhost:8080/directors/Zack%20Snyder"
         ],
         "genres": [
             "Action",
@@ -63,7 +63,7 @@ const movies = [
         "title": "I Care a Lot",
         "year": "2021",
         "directors": [
-            "J Blakeson"
+            "http://localhost:8080/directors/J%20Blakeson"
         ],
         "genres": [
             "Comedy",
@@ -78,8 +78,8 @@ const movies = [
         "title": "Cherry",
         "year": "2021",
         "directors": [
-            "Anthony Russo",
-            "Joe Russo"
+            "http://localhost:8080/directors/Anthony%20Russo",
+            "http://localhost:8080/directors/Joe%20Russo"
         ],
         "genres": [
             "Crime",
@@ -93,7 +93,7 @@ const movies = [
         "title": "Moxie",
         "year": "2021",
         "directors": [
-            "Amy Poehler",
+            "http://localhost:8080/directors/Amy%20Poehler",
         ],
         "genres": [
             "Comedy",
@@ -108,7 +108,7 @@ const movies = [
         "title": "Chaos Walking",
         "year": "2021",
         "directors": [
-            "Doug Liman",
+            "http://localhost:8080/directors/Doug%20Liman",
         ],
         "genres": [
             "Adventure",
@@ -122,7 +122,7 @@ const movies = [
         "title": "Boss Level",
         "year": "2021",
         "directors": [
-            "Joe Carnahan"
+            "http://localhost:8080/directors/Joe%20Carnahan"
         ],
         "genres": [
             "Action",
@@ -137,7 +137,7 @@ const movies = [
         "title": "Nomadland",
         "year": "2020",
         "directors": [
-            "Chloe Zhao"
+            "http://localhost:8080/directors/Chloe%20Zhao"
         ],
         "genres": [
             "Drama"
@@ -150,7 +150,7 @@ const movies = [
         "title": "Mortal Kombat",
         "year": "Mortal Kombat",
         "directors": [
-            "Simon McQuoid"
+            "http://localhost:8080/directors/Simon%20McQuoid"
         ],
         "genres": [
             "Action",
@@ -165,7 +165,7 @@ const movies = [
         "title": "Tom and Jerry",
         "year": "2021",
         "directors": [
-            "Tim Story"
+            "http://localhost:8080/directors/Tim%20Story"
         ],
         "genres": [
             "Animation",
@@ -180,7 +180,7 @@ const movies = [
         "title": "Godzilla vs. Kong",
         "year": "2021",
         "directors": [
-            "Adam Wingard"
+            "http://localhost:8080/directors/Adam%20Wingard"
         ],
         "genres": [
             "Action",
@@ -195,7 +195,7 @@ const movies = [
         "title": "Judas and the Black Messaia",
         "year": "2021",
         "directors": [
-            "Shaka King"
+            "http://localhost:8080/directors/Shaka%20King"
         ],
         "genres": [
             "Biography",
@@ -210,7 +210,7 @@ const movies = [
         "title": "The Unholy",
         "year": "2021",
         "directors": [
-            "Evan Spiliotopoulos"
+            "http://localhost:8080/directors/Evan%20Spiliotopoulos"
         ],
         "genres": [
             "Horror"
@@ -223,7 +223,7 @@ const movies = [
         "title": "The Mauritanian",
         "year": "2021",
         "directors": [
-            "Kevin Macdonald"
+            "http://localhost:8080/directors/Kevin%20Macdonald"
         ],
         "genres": [
             "Drama",
@@ -237,7 +237,7 @@ const movies = [
         "title": "Promising Young Woman",
         "year": "2020",
         "directors": [
-            "Emerald Fennell"
+            "http://localhost:8080/directors/Emerald%20Fennell"
         ],
         "genres": [
             "Crime",
@@ -252,7 +252,7 @@ const movies = [
         "title": "Monster Hunter",
         "year": "2020",
         "directors": [
-            "Paul W.S. Anderson"
+            "http://localhost:8080/directors/Paul%20W.S.%20Anderson"
         ],
         "genres": [
             "Action",
@@ -267,8 +267,8 @@ const movies = [
         "title": "Avengers: Endgame",
         "year": "2019",
         "directors": [
-            "Anthony Russo",
-            "Joe Russo"
+            "http://localhost:8080/directors/Anthony%20Russo",
+            "http://localhost:8080/directors/Joe%20Russo"
         ],
         "genres": [
             "Action",
@@ -283,7 +283,7 @@ const movies = [
         "title": "Crisis",
         "year": "2021",
         "directors": [
-            "Nicholas Jarecki"
+            "http://localhost:8080/directors/Nicholas%20Jarecki"
         ],
         "genres": [
             "Drama",
@@ -297,7 +297,7 @@ const movies = [
         "title": "The Princess Bride",
         "year": "1987",
         "directors": [
-            "Rob Reiner"
+            "http://localhost:8080/directors/Rob%20Reiner"
         ],
         "genres": [
             "Adventure",
@@ -312,7 +312,7 @@ const movies = [
         "title": "The Hitchhiker's Guide to the Galaxy",
         "year": "2005",
         "directors": [
-            "Garth Jennings"
+            "http://localhost:8080/directors/Garth%20Jennings"
         ],
         "genres": [
             "Adventure",
@@ -327,7 +327,7 @@ const movies = [
         "title": "Odd Thomas",
         "year": "2013",
         "directors": [
-            "Stephen Sommers"
+            "http://localhost:8080/directors/Stephen%20Sommers"
         ],
         "genres": [
             "Comedy",
@@ -342,7 +342,7 @@ const movies = [
         "title": "John Dies at the End",
         "year": "2012",
         "directors": [
-            "Don Coscarelli"
+            "http://localhost:8080/directors/Don%20Coscarelli"
         ],
         "genres": [
             "Comedy",
@@ -357,7 +357,7 @@ const movies = [
         "title": "Army of Darkness",
         "year": "1992",
         "directors": [
-            "Sam Raimi"
+            "http://localhost:8080/directors/Sam%20Raimi"
         ],
         "genres": [
             "Comedy",
@@ -372,7 +372,7 @@ const movies = [
         "title": "Tucker and Dale vs Evil",
         "year": "2010",
         "directors": [
-            "Eli Craig"
+            "http://localhost:8080/directors/Eli%20Craig"
         ],
         "genres": [
             "Comedy",
@@ -386,7 +386,7 @@ const movies = [
         "title": "Dark City",
         "year": "1998",
         "directors": [
-            "Alex Proyas"
+            "http://localhost:8080/directors/Alex%20Proyas"
         ],
         "genres": [
             "Mystery",
@@ -401,7 +401,7 @@ const movies = [
         "title": "Spaceballs",
         "year": "1987",
         "directors": [
-            "Mel Brooks"
+            "http://localhost:8080/directors/Mel%20Brooks"
         ],
         "genres": [
             "Adventure",
@@ -416,7 +416,7 @@ const movies = [
         "title": "Valerian and the City of a Thousand Planets",
         "year": "2017",
         "directors": [
-            "Luc Besson"
+            "http://localhost:8080/directors/Luc%20Besson"
         ],
         "genres": [
             "Action",
@@ -431,7 +431,7 @@ const movies = [
         "title": "Identity",
         "year": "2003",
         "directors": [
-            "James Mangold"
+            "http://localhost:8080/directors/James%20Mangold"
         ],
         "genres": [
             "Mystery",
