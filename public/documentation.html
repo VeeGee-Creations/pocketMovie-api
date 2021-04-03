@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Documentation</h1>
-    <h2>Get Endpoints</h2>
+    <h2>GET Endpoints</h2>
     <table>
         <tr>
             <th>Endpoint</th>
@@ -37,7 +37,7 @@
             <td>GET</td>
             <td><a href="http://localhost:8080/movies" target="_blank">http://localhost:8080/movies</a></td>
             <td>JSON</td>
-            <td>/:title</td>
+            <td>/:Title</td>
         </tr>
         <tr>
             <td>/featured</td>
@@ -51,25 +51,18 @@
             <td>GET</td>
             <td><a href="http://localhost:8080/directors" target="_blank">http://localhost:8080/directors</a></td>
             <td>JSON</td>
-            <td>/:name</td>
+            <td>/:Name</td>
         </tr>
         <tr>
             <td>/users</td>
             <td>GET</td>
             <td><a href="http://localhost:8080/users" target="_blank">http://localhost:8080/users</a></td>
             <td>JSON</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td>/favorites</td>
-            <td>GET</td>
-            <td><a href="http://localhost:8080/favorites" target="_blank">http://localhost:8080/favorites</a></td>
-            <td>JSON</td>
-            <td>/:id</td>
+            <td>/:Username</td>
         </tr>
     </table>
 
-    <h2>Put Endpoints</h2>
+    <h2>PUT Endpoints</h2>
     <table>
         <tr>
             <th>Endpoint</th>
@@ -79,22 +72,15 @@
             <th>Parameters</th>
         </tr>
         <tr>
-            <td>/favorites</td>
-            <td>PUT</td>
-            <td><a href="http://localhost:8080/favorites" target="_blank">http://localhost:8080/favorites</a></td>
-            <td>String</td>
-            <td>/:id/:title</td>
-        </tr>
-        <tr>
             <td>/users</td>
             <td>PUT</td>
             <td><a href="http://localhost:8080/users" target="_blank">http://localhost:8080/users</a></td>
-            <td>String</td>
-            <td>/:name/:newName</td>
+            <td>JSON</td>
+            <td>/:Username</td>
         </tr>
     </table>
 
-    <h2>Post and Delete Endpoints</h2>
+    <h2>POST and DELETE Endpoints</h2>
     <table>
         <tr>
             <th>Endpoint</th>
@@ -107,12 +93,10 @@
             <td>/users</td>
             <td>POST</td>
             <td><a href="http://localhost:8080/users" target="_blank">http://localhost:8080/users</a></td>
-            <td>String</td>
+            <td>JSON</td>
             <td>
-                {
-                    "name",
-                    "email"
-                }
+                /:Username/Favorites/push/:MovieID</br>
+                /:Username/Favorites/pull/:MovieID
             </td>
         </tr>
         <tr>
@@ -120,36 +104,51 @@
             <td>DELETE</td>
             <td><a href="http://localhost:8080/users" target="_blank">http://localhost:8080/users</a></td>
             <td>String</td>
-            <td>/:email</td>
+            <td>/:Username</td>
         </tr>
     </table>
 
-    <h2>Get Movies Example Response</h2>
+    <h2>GET Movies Example Response</h2>
     <div class="code">
 <pre>
 <code>
 [
     {
-        "title": "The Princess Bride",
-        "year": "1987",
-        "directors": [
-            "http://localhost:8080/directors/Rob%20Reiner"
+        "Directors": [
+            {
+                "_id": "605fa677036abe2b60c6e29b",
+                "Name": "Sam Raimi",
+                "Bio": "Highly inventive U.S. film director/producer/writer/actor Sam Raimi first came to the attention of film fans with the savage, yet darkly humorous, low-budget horror film, The Evil Dead (1981). From his childhood, Raimi was a fan of the cinema and, before he was ten-years-old, he was out making movies with an 8mm camera. He was a devoted fan of The Three Stooges, so much of Raimi's film work in his teens, with good friends Bruce Campbell and Rob Tapert, was slapstick comedy based around what they had observed from \"Stooges\" movies.\n\nAmong the three of them, they wrote, directed, produced and edited a short horror movie titled Within the Woods (1978), which was then shown to prospective investors to raise the money necessary to film The Evil Dead (1981). It met with lukewarm interest in the U.S. with local distributors, so Raimi took the film to Europe, where it was much more warmly received. After it started gaining positive reviews and, more importantly, ticket sales upon its release in Europe, U.S. distributors showed renewed interest, and \"Evil Dead\" was eventually released stateside to strong box office returns. His next directorial effort was Crimewave (1985), a quirky, cartoon-like effort that failed to catch fire with audiences. However, he bounced back with Evil Dead II (1987), a racier and more humorous remake/sequel to the original \"Dead\" that did even better at the box office. Raimi was then given his biggest budget to date to shoot Darkman (1990), a comic book-style fantasy about a scarred avenger. The film did moderate business, but Raimi's strong visual style was evident throughout the film via inventive and startling camera work that caught the attention of numerous critics.\n\nThe third chapter in the Evil Dead story beckoned, and Raimi once again directed buddy Campbell as the gritty hero \"Ash\", in the Gothic horror Army of Darkness (1992). Raimi surprised fans when he took a turn away from the fantasy genre and directed Gene Hackman and Sharon Stone in the sexy western, The Quick and the Dead (1995); four years later, he took the directorial reins on A Simple Plan (1998), a crime thriller about stolen money, starring Bill Paxton and Bridget Fonda. In early 1999, he directed the baseball film, For Love of the Game (1999), and, in 2000, returned to the fantasy genre with a top-flight cast in The Gift (2000). In 2002, Raimi was given a real opportunity to demonstrate his dynamic visual style with the big-budget film adaptation of the Stan Lee comic book superhero, Spider-Man (2002), and fans were not disappointed. The movie was strong in both script and effects, and was a runaway success at the box office. Of course, Raimi returned for the sequel, Spider-Man 2 (2004), which surpassed the original in box-office takings.",
+                "Birth": "1959-10-23",
+                "Death": null
+            }
         ],
-        "genres": [
-            "Adventure",
-            "Family",
-            "Fantasy"
+        "Genres": [
+            {
+                "_id": "605f8b194d3d4b1d9eac613c",
+                "Name": "Comedy",
+                "Description": "Virtually all scenes should contain characters participating in humorous or comedic experiences. The comedy can be exclusively for the viewer, at the expense of the characters in the title, or be shared with them. Please submit qualifying keywords to better describe the humor (i.e. spoof, parody, irony, slapstick, satire, black-comedy etc). If the title does not conform to the 'virtually all scenes' guideline then please do not add the comedy genre; instead, submit the same keyword variations described above to signify the comedic elements of the title. Subjective."
+            },
+            {
+                "_id": "605f99663065fb69139e9258",
+                "Name": "Horror",
+                "Description": "Should contain numerous consecutive scenes of characters effecting a terrifying and/or repugnant narrative throughout the title. Note: not to be confused with Thriller which is not usually based in fear or abhorrence. Subjective."
+            }
         ],
-        "synopsis": "While home sick in bed, a young boy's grandfather reads him the story of a farmboy-turned-pirate who encounters numerous obstacles, enemies and allies in his quest to be reunited with his true love.",
-        "cover": "http://localhost:8080/public/covers/the-princess-bride.jpg",
-        "featured": true
+        "Actors": [],
+        "_id": "605fb65b036abe2b60c6e2a5",
+        "Title": "Army of Darkness",
+        "Synopsis": "A sardonic hardware store clerk is accidentally transported to 1300 A.D., where he must retrieve the Necronomicon and battle an army of the dead so he can return home.",
+        "ImageURL": "/covers/army-of-darkness.jpg",
+        "Featured": true,
+        "Release": "1992"
     }
 ]
 </code>
 </pre>
     </div>
 
-    <h2>Get Directors Example Response</h2>
+    <h2>GET Directors Example Response</h2>
     <div class="code">
 <pre>
 <code>
@@ -165,17 +164,126 @@
 </pre>
     </div>
 
-    <h2>Get Users Example Response</h2>
+    <h2>GET Users Example Response</h2>
     <div class="code">
 <pre>
 <code>
 [
     {
-        "id": "0aee6973-faed-463a-acea-5f33ea556182",
-        "name": "watcher",
-        "email": "watcher@email.com"
+        "Favorites": [
+            {
+                "Directors": [
+                    {
+                        "_id": "605fa677036abe2b60c6e29b",
+                        "Name": "Sam Raimi",
+                        "Bio": "Highly inventive U.S. film director/producer/writer/actor Sam Raimi first came to the attention of film fans with the savage, yet darkly humorous, low-budget horror film, The Evil Dead (1981). From his childhood, Raimi was a fan of the cinema and, before he was ten-years-old, he was out making movies with an 8mm camera. He was a devoted fan of The Three Stooges, so much of Raimi's film work in his teens, with good friends Bruce Campbell and Rob Tapert, was slapstick comedy based around what they had observed from \"Stooges\" movies.\n\nAmong the three of them, they wrote, directed, produced and edited a short horror movie titled Within the Woods (1978), which was then shown to prospective investors to raise the money necessary to film The Evil Dead (1981). It met with lukewarm interest in the U.S. with local distributors, so Raimi took the film to Europe, where it was much more warmly received. After it started gaining positive reviews and, more importantly, ticket sales upon its release in Europe, U.S. distributors showed renewed interest, and \"Evil Dead\" was eventually released stateside to strong box office returns. His next directorial effort was Crimewave (1985), a quirky, cartoon-like effort that failed to catch fire with audiences. However, he bounced back with Evil Dead II (1987), a racier and more humorous remake/sequel to the original \"Dead\" that did even better at the box office. Raimi was then given his biggest budget to date to shoot Darkman (1990), a comic book-style fantasy about a scarred avenger. The film did moderate business, but Raimi's strong visual style was evident throughout the film via inventive and startling camera work that caught the attention of numerous critics.\n\nThe third chapter in the Evil Dead story beckoned, and Raimi once again directed buddy Campbell as the gritty hero \"Ash\", in the Gothic horror Army of Darkness (1992). Raimi surprised fans when he took a turn away from the fantasy genre and directed Gene Hackman and Sharon Stone in the sexy western, The Quick and the Dead (1995); four years later, he took the directorial reins on A Simple Plan (1998), a crime thriller about stolen money, starring Bill Paxton and Bridget Fonda. In early 1999, he directed the baseball film, For Love of the Game (1999), and, in 2000, returned to the fantasy genre with a top-flight cast in The Gift (2000). In 2002, Raimi was given a real opportunity to demonstrate his dynamic visual style with the big-budget film adaptation of the Stan Lee comic book superhero, Spider-Man (2002), and fans were not disappointed. The movie was strong in both script and effects, and was a runaway success at the box office. Of course, Raimi returned for the sequel, Spider-Man 2 (2004), which surpassed the original in box-office takings.",
+                        "Birth": "1959-10-23",
+                        "Death": null
+                    }
+                ],
+                "Genres": [
+                    {
+                        "_id": "605f99663065fb69139e9258",
+                        "Name": "Horror",
+                        "Description": "Should contain numerous consecutive scenes of characters effecting a terrifying and/or repugnant narrative throughout the title. Note: not to be confused with Thriller which is not usually based in fear or abhorrence. Subjective."
+                    }
+                ],
+                "Actors": [],
+                "_id": "605fe687036abe2b60c6e2af",
+                "Title": "The Evil Dead",
+                "Synopsis": "Five friends travel to a cabin in the woods, where they unknowingly release flesh-possessing demons.",
+                "ImageURL": "/covers/the-evil-dead.jpg",
+                "Featured": false,
+                "Release": "1981"
+            },
+            {
+                "Directors": [
+                    {
+                        "_id": "605fa677036abe2b60c6e29b",
+                        "Name": "Sam Raimi",
+                        "Bio": "Highly inventive U.S. film director/producer/writer/actor Sam Raimi first came to the attention of film fans with the savage, yet darkly humorous, low-budget horror film, The Evil Dead (1981). From his childhood, Raimi was a fan of the cinema and, before he was ten-years-old, he was out making movies with an 8mm camera. He was a devoted fan of The Three Stooges, so much of Raimi's film work in his teens, with good friends Bruce Campbell and Rob Tapert, was slapstick comedy based around what they had observed from \"Stooges\" movies.\n\nAmong the three of them, they wrote, directed, produced and edited a short horror movie titled Within the Woods (1978), which was then shown to prospective investors to raise the money necessary to film The Evil Dead (1981). It met with lukewarm interest in the U.S. with local distributors, so Raimi took the film to Europe, where it was much more warmly received. After it started gaining positive reviews and, more importantly, ticket sales upon its release in Europe, U.S. distributors showed renewed interest, and \"Evil Dead\" was eventually released stateside to strong box office returns. His next directorial effort was Crimewave (1985), a quirky, cartoon-like effort that failed to catch fire with audiences. However, he bounced back with Evil Dead II (1987), a racier and more humorous remake/sequel to the original \"Dead\" that did even better at the box office. Raimi was then given his biggest budget to date to shoot Darkman (1990), a comic book-style fantasy about a scarred avenger. The film did moderate business, but Raimi's strong visual style was evident throughout the film via inventive and startling camera work that caught the attention of numerous critics.\n\nThe third chapter in the Evil Dead story beckoned, and Raimi once again directed buddy Campbell as the gritty hero \"Ash\", in the Gothic horror Army of Darkness (1992). Raimi surprised fans when he took a turn away from the fantasy genre and directed Gene Hackman and Sharon Stone in the sexy western, The Quick and the Dead (1995); four years later, he took the directorial reins on A Simple Plan (1998), a crime thriller about stolen money, starring Bill Paxton and Bridget Fonda. In early 1999, he directed the baseball film, For Love of the Game (1999), and, in 2000, returned to the fantasy genre with a top-flight cast in The Gift (2000). In 2002, Raimi was given a real opportunity to demonstrate his dynamic visual style with the big-budget film adaptation of the Stan Lee comic book superhero, Spider-Man (2002), and fans were not disappointed. The movie was strong in both script and effects, and was a runaway success at the box office. Of course, Raimi returned for the sequel, Spider-Man 2 (2004), which surpassed the original in box-office takings.",
+                        "Birth": "1959-10-23",
+                        "Death": null
+                    }
+                ],
+                "Genres": [
+                    {
+                        "_id": "605f8b194d3d4b1d9eac613c",
+                        "Name": "Comedy",
+                        "Description": "Virtually all scenes should contain characters participating in humorous or comedic experiences. The comedy can be exclusively for the viewer, at the expense of the characters in the title, or be shared with them. Please submit qualifying keywords to better describe the humor (i.e. spoof, parody, irony, slapstick, satire, black-comedy etc). If the title does not conform to the 'virtually all scenes' guideline then please do not add the comedy genre; instead, submit the same keyword variations described above to signify the comedic elements of the title. Subjective."
+                    },
+                    {
+                        "_id": "605f99663065fb69139e9258",
+                        "Name": "Horror",
+                        "Description": "Should contain numerous consecutive scenes of characters effecting a terrifying and/or repugnant narrative throughout the title. Note: not to be confused with Thriller which is not usually based in fear or abhorrence. Subjective."
+                    }
+                ],
+                "Actors": [],
+                "_id": "605fe687036abe2b60c6e2b0",
+                "Title": "Evil Dead II",
+                "Synopsis": "The lone survivor of an onslaught of flesh-possessing spirits holes up in a cabin with a group of strangers while the demons continue their attack.",
+                "ImageURL": "/covers/evil-dead-ii.jpg",
+                "Featured": false,
+                "Release": "1987"
+            },
+            {
+                "Directors": [
+                    {
+                        "_id": "605fa677036abe2b60c6e29b",
+                        "Name": "Sam Raimi",
+                        "Bio": "Highly inventive U.S. film director/producer/writer/actor Sam Raimi first came to the attention of film fans with the savage, yet darkly humorous, low-budget horror film, The Evil Dead (1981). From his childhood, Raimi was a fan of the cinema and, before he was ten-years-old, he was out making movies with an 8mm camera. He was a devoted fan of The Three Stooges, so much of Raimi's film work in his teens, with good friends Bruce Campbell and Rob Tapert, was slapstick comedy based around what they had observed from \"Stooges\" movies.\n\nAmong the three of them, they wrote, directed, produced and edited a short horror movie titled Within the Woods (1978), which was then shown to prospective investors to raise the money necessary to film The Evil Dead (1981). It met with lukewarm interest in the U.S. with local distributors, so Raimi took the film to Europe, where it was much more warmly received. After it started gaining positive reviews and, more importantly, ticket sales upon its release in Europe, U.S. distributors showed renewed interest, and \"Evil Dead\" was eventually released stateside to strong box office returns. His next directorial effort was Crimewave (1985), a quirky, cartoon-like effort that failed to catch fire with audiences. However, he bounced back with Evil Dead II (1987), a racier and more humorous remake/sequel to the original \"Dead\" that did even better at the box office. Raimi was then given his biggest budget to date to shoot Darkman (1990), a comic book-style fantasy about a scarred avenger. The film did moderate business, but Raimi's strong visual style was evident throughout the film via inventive and startling camera work that caught the attention of numerous critics.\n\nThe third chapter in the Evil Dead story beckoned, and Raimi once again directed buddy Campbell as the gritty hero \"Ash\", in the Gothic horror Army of Darkness (1992). Raimi surprised fans when he took a turn away from the fantasy genre and directed Gene Hackman and Sharon Stone in the sexy western, The Quick and the Dead (1995); four years later, he took the directorial reins on A Simple Plan (1998), a crime thriller about stolen money, starring Bill Paxton and Bridget Fonda. In early 1999, he directed the baseball film, For Love of the Game (1999), and, in 2000, returned to the fantasy genre with a top-flight cast in The Gift (2000). In 2002, Raimi was given a real opportunity to demonstrate his dynamic visual style with the big-budget film adaptation of the Stan Lee comic book superhero, Spider-Man (2002), and fans were not disappointed. The movie was strong in both script and effects, and was a runaway success at the box office. Of course, Raimi returned for the sequel, Spider-Man 2 (2004), which surpassed the original in box-office takings.",
+                        "Birth": "1959-10-23",
+                        "Death": null
+                    }
+                ],
+                "Genres": [
+                    {
+                        "_id": "605f8b194d3d4b1d9eac613c",
+                        "Name": "Comedy",
+                        "Description": "Virtually all scenes should contain characters participating in humorous or comedic experiences. The comedy can be exclusively for the viewer, at the expense of the characters in the title, or be shared with them. Please submit qualifying keywords to better describe the humor (i.e. spoof, parody, irony, slapstick, satire, black-comedy etc). If the title does not conform to the 'virtually all scenes' guideline then please do not add the comedy genre; instead, submit the same keyword variations described above to signify the comedic elements of the title. Subjective."
+                    },
+                    {
+                        "_id": "605f99663065fb69139e9258",
+                        "Name": "Horror",
+                        "Description": "Should contain numerous consecutive scenes of characters effecting a terrifying and/or repugnant narrative throughout the title. Note: not to be confused with Thriller which is not usually based in fear or abhorrence. Subjective."
+                    }
+                ],
+                "Actors": [],
+                "_id": "605fb65b036abe2b60c6e2a5",
+                "Title": "Army of Darkness",
+                "Synopsis": "A sardonic hardware store clerk is accidentally transported to 1300 A.D., where he must retrieve the Necronomicon and battle an army of the dead so he can return home.",
+                "ImageURL": "/covers/army-of-darkness.jpg",
+                "Featured": true,
+                "Release": "1992"
+            }
+        ],
+        "_id": "605ff3e4036abe2b60c6e2b1",
+        "Username": "user1",
+        "Password": "user1pass",
+        "Email": "user1@email.com",
+        "Birthday": "1985-02-01T00:00:00.000Z"
     }
 ]
+
+
+</code>
+</pre>
+    </div>
+
+    <h2>PUT and POST User Example Response</h2>
+    <p></p>
+    <div class="code">
+<pre>
+<code>
+{
+    "Favorites": [],
+    "_id": "6068ac7f491759c2b0eb6329",
+    "Username": "user6",
+    "Password": "user6pass",
+    "Email": "user6@email.com",
+    "Birthday": "1985-02-01T00:00:00.000Z",
+    "__v": 0
+}
 </code>
 </pre>
     </div>
@@ -183,14 +291,43 @@
     <h2>String Responses</h2>
     <p>
         String responses will announce either the current issue or the success of your request. All requests are accompanied by a corresponding HTML status code.</br></br>
-        Example 1: Odd Thomas added to your favorites.</br>
-        Example 2: The username "watcher" is already taken.
+        Example 1: user6 was deleted</br>
+        Example 2: Error: MongoError: E11000 duplicate key error collection: pocketMovies.users index: Email_1 dup key: { Email: "user6@email.com" }
     </p>
 
-    <h2>PUT to favorites</h2>
+    <h2>Users</h2>
     <p>
-        If you PUT a movie title to your favorites list that does not already exist in the list, it will be saved to favorites.</br>
-        PUT that movie to your favorites again to remove it from the list. This functions like a toggle.
+        POST to '/users' to will create a new user.</br>
+        PUT to 'users/:Username' will allow you to update user information</br></br>
+        Expected JSON Format:
+    </p>
+    <div class="code">
+<pre>
+<code>
+{
+    "Username": "user7",
+    "Email": "user6@email.com",
+    "Password": "user6pass",
+    "Birthday": "1985-02-06"
+}
+</code>
+</pre>
+    </div>
+    <p>
+        POST '/users/:Username/Favorites/push/:MovieID' will add movie to user favorites list</br>
+        POST '/users/:Username/Favorites/push/:MovieID' will remove movie from user favortes list
+    </p>
+
+    <h2>Movies</h2>
+    <p>
+        GET '/movies' will return all movies</br>
+        GET '/movies/:Title' will return movies by title
+    </p>
+
+    <h2>Directors</h2>
+    <p>
+        GET '/directors' will return all directors</br>
+        GET '/directors/:Nitle' will return directors by Name
     </p>
 </body>
 </html>
