@@ -1,16 +1,21 @@
 const express = require('express'),
-    morgan = require('morgan');
-const { restart } = require('nodemon');
+    morgan = require('morgan'),
     uuidv4 = require('uuid/v4'),
     mongoose = require('mongoose'),
-    models = require('./models.js');
+    passport = require('passport');
+const { restart } = require('nodemon');
+
+require('./passport');
 
 const app = express();
 const uuid = uuidv4();
-const movies = models.Movie;
-const users = models.User;
-const genres = models.Genre;
-const directors = models.Director;
+const models = require('./models.js'),
+    auth = require('./auth')(app);
+const Movies = models.Movie;
+const Users = models.User;
+const Genres = models.Genre;
+const Directors = models.Director;
+const passAuth =  passport.authenticate('jwt', {session: false});
 const PORT = process.env.PORT || 8080;
 
 mongoose.connect('mongodb://localhost:27017/pocketMovies', {
@@ -39,74 +44,74 @@ app.get('/documentation', (req, res) => {
 });
 
 // get list of movies
-app.get('/movies', (req, res) => {
-    movies.find().populate([
-        {path: 'Genres',  model: genres},
-        {path: 'Directors',  model: directors}
+app.get('/movies', passAuth, (req, res) => {
+    Movies.find().populate([
+        {path: 'Genres',  model: Genres},
+        {path: 'Directors',  model: Directors}
     ])
-    .then(movies => res.json(movies))
+    .then(Movies => res.json(Movies))
     .catch((error) => res.status(500).send(`Error: ${error}`));
 });
 
 // get movie by title
-app.get('/movies/:Title', (req, res) => {
-    movies.findOne({Title: req.params.Title})
+app.get('/movies/:Title', passAuth, (req, res) => {
+    Movies.findOne({Title: req.params.Title})
     .populate([
-        {path: 'Genres',  model: genres},
-        {path: 'Directors',  model: directors}
+        {path: 'Genres',  model: Genres},
+        {path: 'Directors',  model: Directors}
     ])
     .then((movie) => res.json(movie))
     .catch((err) => res.status(500).send(`Error: ${err}`));
 });
 
 // get list of featured movies
-app.get('/featured', (req, res) => {
-    movies.find({Featured: true}).populate([
-        {path: 'Genres', model: genres},
-        {path: 'Directors', model: directors}
+app.get('/featured', passAuth, (req, res) => {
+    Movies.find({Featured: true}).populate([
+        {path: 'Genres', model: Genres},
+        {path: 'Directors', model: Directors}
     ])
     .then((movie) => res.json(movie))
     .catch((err) => res.status(500).send(`Error: ${err}`));
 });
 
 // get list of directors
-app.get('/directors', (req, res) => {
-    directors.find().then((director) => res.json(director))
+app.get('/directors', passAuth, (req, res) => {
+    Directors.find().then((director) => res.json(director))
     .catch((err) => res.status(500).send(`Error: ${err}`));
 });
 
 // get director by name
-app.get('/directors/:Name', (req, res) => {
-    directors.find({Name: req.params.Name})
+app.get('/directors/:Name', passAuth, (req, res) => {
+    Directors.find({Name: req.params.Name})
     .then((director) => res.json(director))
     .catch((err) => res.status(500).send(`Error: ${err}`));
 });
 
 //get list of users
-app.get('/users', (req, res) => {
-    users.find().populate({
-        path: 'Favorites', model: movies,
-        populate: [{path: 'Directors', model: directors}, {path: 'Genres', model: genres}]
-    })
-    .then((user) => res.json(user))
-    .catch((err) => res.status(500).send(`Error: ${err}`));
-});
+// app.get('/users', (req, res) => {
+//     Users.find().populate({
+//         path: 'Favorites', model: Movies,
+//         populate: [{path: 'Directors', model: Directors}, {path: 'Genres', model: Genres}]
+//     })
+//     .then((user) => res.json(user))
+//     .catch((err) => res.status(500).send(`Error: ${err}`));
+// });
 
 // get user by username
-app.get('/users/:Username', (req, res) => {
-    users.findOne({Username: req.params.Username})
+app.get('/users/:Username', passAuth, (req, res) => {
+    Users.findOne({Username: req.params.Username})
     .populate({
-        path: 'Favorites', model: movies,
-        populate: [{path: 'Directors', model: directors}, {path: 'Genres', model: genres}]
+        path: 'Favorites', model: Movies,
+        populate: [{path: 'Directors', model: Directors}, {path: 'Genres', model: Genres}]
     })
     .then((user) => res.json(user))
     .catch((err) => res.status(500).send(`Error: ${err}`));
 });
 
 //add favorite movie
-app.post('/users/:Username/favorites/push/:MovieID', (req, res) => {
+app.post('/users/:Username/favorites/push/:MovieID', passAuth, (req, res) => {
     const MovieID = mongoose.Types.ObjectId(req.params.MovieID);
-    users.findOneAndUpdate({Username: req.params.Username},
+    Users.findOneAndUpdate({Username: req.params.Username},
     {$addToSet:
         {Favorites: MovieID}
     },
@@ -119,9 +124,9 @@ app.post('/users/:Username/favorites/push/:MovieID', (req, res) => {
 });
 
 //remove favorite movie
-app.post('/users/:Username/favorites/pull/:MovieID', (req, res) => {
+app.post('/users/:Username/favorites/pull/:MovieID', passAuth, (req, res) => {
     const MovieID = mongoose.Types.ObjectId(req.params.MovieID);
-    users.findOneAndUpdate({Username: req.params.Username},
+    Users.findOneAndUpdate({Username: req.params.Username},
     {$pull:
         {Favorites: MovieID}
     },
@@ -135,7 +140,7 @@ app.post('/users/:Username/favorites/pull/:MovieID', (req, res) => {
 
 //add new user
 app.post('/users', (req, res) => {
-    users.create({
+    Users.create({
         Username: req.body.Username,
         Password: req.body.Password,
         Email: req.body.Email,
@@ -147,8 +152,8 @@ app.post('/users', (req, res) => {
 });
 
 //change user name
-app.put('/users/:Username', (req, res) => {
-    users.findOneAndUpdate({ Username: req.params.Username },
+app.put('/users/:Username', passAuth, (req, res) => {
+    Users.findOneAndUpdate({ Username: req.params.Username },
     { $set:
         {
             Username: req.body.Username,
@@ -165,8 +170,8 @@ app.put('/users/:Username', (req, res) => {
     });
 });
 
-app.delete('/users/:Username', (req, res) => {
-    users.findOneAndRemove({Username: req.params.Username})
+app.delete('/users/:Username', passAuth, (req, res) => {
+    Users.findOneAndRemove({Username: req.params.Username})
     .then((user) => {
         if(!user) return res.status(400).send(`${req.params.Username} was not found`);
 
