@@ -90,16 +90,22 @@
             <th>Parameters</th>
         </tr>
         <tr>
-            <td>/users</td>
+            <td>/login</td>
             <td>POST</td>
-            <td><a href="/users/Favorites/push" target="_blank">/users/Favorites/push</a></td>
+            <td><a href="/login" target="_blank">/login</a></td>
+            <td>JSON</td>
+            <td>/login?Username=(username)&Password=(password)</td>
+        <tr>
+            <td>/users/favorites/push</td>
+            <td>POST</td>
+            <td><a href="/users/favorites/push" target="_blank">/users/Favorites/push</a></td>
             <td>JSON</td>
             <td>:MovieID</td>
         </tr>
         <tr>
-            <td>/users</td>
+            <td>/users/favorites/pull</td>
             <td>POST</td>
-            <td><a href="/users/Favorites/pull" target="_blank">/users/Favorites/pull</a></td>
+            <td><a href="/users/favorites/pull" target="_blank">/users/Favorites/pull</a></td>
             <td>JSON</td>
             <td>/:MovieID</td>
         </tr>
