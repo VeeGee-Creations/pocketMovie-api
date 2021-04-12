@@ -17,8 +17,9 @@ const Directors = models.Director;
 const passAuth =  passport.authenticate('jwt', {session: false});
 const PORT = process.env.PORT || 8080;
 
-mongoose.connect('mongodb://localhost:27017/pocketMovies', {
-    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
+// mongoose.connect('mongodb://localhost:27017/pocketMovies', {
+mongoose.connect(process.env.CONNECTION_URI, {
+useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 });
 
 //middleware
