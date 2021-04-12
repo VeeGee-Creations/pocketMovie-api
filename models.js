@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+    bcrypt = require('bcrypt'),
+    beautifyUnique = require('mongoose-beautiful-unique-validation');
 
 const movieSchema = mongoose.Schema({
     Title: {type: String, required: true},
@@ -12,12 +14,23 @@ const movieSchema = mongoose.Schema({
 });
 
 const userSchema = mongoose.Schema({
-    Username: {type: String, required: true, unique: true},
-    Password: {type: String, required: true},
-    Email: {type: String, required: true, unique: true},
+    Username: {type: String, required: [true, 'Username is required'], unique: '({VALUE}) is already registered', minLength: [3, 'Username minimum length of 3 characters']},
+    Password: {type: String, required: [true, 'Password is required']},
+    Email: {type: String, required: [true, 'Email is required'], unique: '({VALUE}) is already registered'},
     Birthday: Date,
     Favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'movies'}]
 });
+
+//make salty hasbrowns
+userSchema.statics.hashPassword = (password) => {
+    return bcrypt.hashSync(password, 10000);
+};
+
+userSchema.methods.validatePassword = function(password) {
+    return bcrypt.compareSync(password, this.Password);
+};
+
+userSchema.plugin(beautifyUnique);
 
 const genreSchema = mongoose.Schema({
     Name: String,

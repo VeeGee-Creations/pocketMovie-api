@@ -2,8 +2,10 @@ const express = require('express'),
     morgan = require('morgan'),
     uuidv4 = require('uuid/v4'),
     mongoose = require('mongoose'),
-    passport = require('passport');
-const { restart } = require('nodemon');
+    passport = require('passport'),
+    cors = require('cors'),
+    { restart } = require('nodemon'),
+    {check, validationResult} = require('express-validator');
 
 require('./passport');
 
@@ -19,10 +21,11 @@ const passAuth =  passport.authenticate('jwt', {session: false});
 const PORT = process.env.PORT || 8080;
 
 mongoose.connect('mongodb://localhost:27017/pocketMovies', {
-    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true
+    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 });
 
 //middleware
+app.use(cors());
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(express.json());
@@ -87,19 +90,10 @@ app.get('/directors/:Name', passAuth, (req, res) => {
     .catch((err) => res.status(500).send(`Error: ${err}`));
 });
 
-//get list of users
-// app.get('/users', (req, res) => {
-//     Users.find().populate({
-//         path: 'Favorites', model: Movies,
-//         populate: [{path: 'Directors', model: Directors}, {path: 'Genres', model: Genres}]
-//     })
-//     .then((user) => res.json(user))
-//     .catch((err) => res.status(500).send(`Error: ${err}`));
-// });
+// get user profile
 
-// get user by username
-app.get('/users/:Username', passAuth, (req, res) => {
-    Users.findOne({Username: req.params.Username})
+app.get('/users/profile', passAuth, (req, res) => {
+    Users.findOne({Username: req.user.Username})
     .populate({
         path: 'Favorites', model: Movies,
         populate: [{path: 'Directors', model: Directors}, {path: 'Genres', model: Genres}]
@@ -109,9 +103,9 @@ app.get('/users/:Username', passAuth, (req, res) => {
 });
 
 //add favorite movie
-app.post('/users/:Username/favorites/push/:MovieID', passAuth, (req, res) => {
+app.post('/users/favorites/push/:MovieID', passAuth, (req, res) => {
     const MovieID = mongoose.Types.ObjectId(req.params.MovieID);
-    Users.findOneAndUpdate({Username: req.params.Username},
+    Users.findOneAndUpdate({Username: req.user.Username},
     {$addToSet:
         {Favorites: MovieID}
     },
@@ -124,9 +118,9 @@ app.post('/users/:Username/favorites/push/:MovieID', passAuth, (req, res) => {
 });
 
 //remove favorite movie
-app.post('/users/:Username/favorites/pull/:MovieID', passAuth, (req, res) => {
+app.post('/users/favorites/pull/:MovieID', passAuth, (req, res) => {
     const MovieID = mongoose.Types.ObjectId(req.params.MovieID);
-    Users.findOneAndUpdate({Username: req.params.Username},
+    Users.findOneAndUpdate({Username: req.user.Username},
     {$pull:
         {Favorites: MovieID}
     },
@@ -139,44 +133,64 @@ app.post('/users/:Username/favorites/pull/:MovieID', passAuth, (req, res) => {
 });
 
 //add new user
-app.post('/users', (req, res) => {
+app.post('/users', [
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password minimum length of 8 characters.').isLength({min: 8}),
+    check('Email', 'Email does not appear to be valid.').isEmail()
+], (req, res) => {
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()) return res.status(422).json({Error: errors.array()});
+
+    const hashedPassword = Users.hashPassword(req.body.Password);
+
     Users.create({
         Username: req.body.Username,
-        Password: req.body.Password,
+        Password: hashedPassword,
         Email: req.body.Email,
         Birthday: req.body.Birthday,
         Favorites: []
     })
     .then((user) => res.status(201).json(user))
-    .catch((err) => res.status(500).send(`Error: ${err}`))
+    .catch((err) => res.status(422).send(`Error: ${err}`))
 });
 
-//change user name
-app.put('/users/:Username', passAuth, (req, res) => {
-    Users.findOneAndUpdate({ Username: req.params.Username },
+//change user information
+app.put('/users/', passAuth, [
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password minimum length of 8 characters.').isLength({min: 8}),
+    check('Email', 'Email does not appear to be valid.').isEmail()
+], (req, res) => {
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()) return res.status(422).json({Error: errors.array()});
+
+    const hashedPassword = Users.hashPassword(req.body.Password);
+
+    Users.findOneAndUpdate({ Username: req.user.Username },
     { $set:
         {
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday
         }
     },
     { new: true },
     (err, updatedUser) => {
-        if(err) return res.status(500).send('Error: ' + err);
+        if(err) return res.status(422).send('Error: ' + err);
 
         return res.json(updatedUser);
     });
 });
 
-app.delete('/users/:Username', passAuth, (req, res) => {
-    Users.findOneAndRemove({Username: req.params.Username})
+app.delete('/users', passAuth, (req, res) => {
+    Users.findOneAndRemove({Username: req.user.Username})
     .then((user) => {
-        if(!user) return res.status(400).send(`${req.params.Username} was not found`);
+        if(!user) return res.status(400).send(`${req.user.Username} was not found`);
 
-        return res.status(200).send(`${req.params.Username} was deleted`);
+        return res.status(200).send(`${req.user.Username} was deleted`);
     })
 });
 
-app.listen(PORT, () => console.log(`App is listening on port ${PORT}.`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Listening on port ${PORT}.`));

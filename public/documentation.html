@@ -54,11 +54,11 @@
             <td>/:Name</td>
         </tr>
         <tr>
-            <td>/users</td>
+            <td>/users/profile</td>
             <td>GET</td>
-            <td><a href="http://localhost:8080/users" target="_blank">http://localhost:8080/users</a></td>
+            <td><a href="http://localhost:8080/users/profile" target="_blank">http://localhost:8080/users/profile</a></td>
             <td>JSON</td>
-            <td>/:Username</td>
+            <td>N/A</td>
         </tr>
     </table>
 
@@ -76,7 +76,7 @@
             <td>PUT</td>
             <td><a href="http://localhost:8080/users" target="_blank">http://localhost:8080/users</a></td>
             <td>JSON</td>
-            <td>/:Username</td>
+            <td>N/A</td>
         </tr>
     </table>
 
@@ -92,12 +92,16 @@
         <tr>
             <td>/users</td>
             <td>POST</td>
-            <td><a href="http://localhost:8080/users" target="_blank">http://localhost:8080/users</a></td>
+            <td><a href="http://localhost:8080/users/Favorites/push" target="_blank">http://localhost:8080/users/Favorites/push</a></td>
             <td>JSON</td>
-            <td>
-                /:Username/Favorites/push/:MovieID</br>
-                /:Username/Favorites/pull/:MovieID
-            </td>
+            <td>:MovieID</td>
+        </tr>
+        <tr>
+            <td>/users</td>
+            <td>POST</td>
+            <td><a href="http://localhost:8080/users/Favorites/pull" target="_blank">http://localhost:8080/users/Favorites/pull</a></td>
+            <td>JSON</td>
+            <td>/:MovieID</td>
         </tr>
         <tr>
             <td>/users</td>
@@ -164,7 +168,7 @@
 </pre>
     </div>
 
-    <h2>GET Users Example Response</h2>
+    <h2>GET Profile Example Response</h2>
     <div class="code">
 <pre>
 <code>
@@ -292,13 +296,13 @@
     <p>
         String responses will announce either the current issue or the success of your request. All requests are accompanied by a corresponding HTML status code.</br></br>
         Example 1: user6 was deleted</br>
-        Example 2: Error: MongoError: E11000 duplicate key error collection: pocketMovies.users index: Email_1 dup key: { Email: "user6@email.com" }
+        Example 2: Error: ValidationError: Email: (user6@email.com) is already registered
     </p>
 
     <h2>Users</h2>
     <p>
         POST to '/users' to will create a new user.</br>
-        PUT to 'users/:Username' will allow you to update user information</br></br>
+        PUT to '/users' will allow you to update user information</br></br>
         Expected JSON Format:
     </p>
     <div class="code">
@@ -314,8 +318,8 @@
 </pre>
     </div>
     <p>
-        POST '/users/:Username/Favorites/push/:MovieID' will add movie to user favorites list</br>
-        POST '/users/:Username/Favorites/push/:MovieID' will remove movie from user favortes list
+        POST '/users/Favorites/push/:MovieID' will add movie to user favorites list</br>
+        POST '/users/Favorites/push/:MovieID' will remove movie from user favortes list
     </p>
 
     <h2>Movies</h2>
@@ -327,7 +331,7 @@
     <h2>Directors</h2>
     <p>
         GET '/directors' will return all directors</br>
-        GET '/directors/:Nitle' will return directors by Name
+        GET '/directors/:Name' will return directors by Name
     </p>
 </body>
 </html>
