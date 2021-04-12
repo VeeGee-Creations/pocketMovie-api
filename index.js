@@ -3,7 +3,6 @@ const express = require('express'),
     mongoose = require('mongoose'),
     passport = require('passport'),
     cors = require('cors'),
-    { restart } = require('nodemon'),
     {check, validationResult} = require('express-validator');
 
 require('./passport');
