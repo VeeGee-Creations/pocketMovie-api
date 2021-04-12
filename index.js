@@ -1,6 +1,5 @@
 const express = require('express'),
     morgan = require('morgan'),
-    uuidv4 = require('uuid/v4'),
     mongoose = require('mongoose'),
     passport = require('passport'),
     cors = require('cors'),
