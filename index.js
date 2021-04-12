@@ -10,7 +10,6 @@ const express = require('express'),
 require('./passport');
 
 const app = express();
-const uuid = uuidv4();
 const models = require('./models.js'),
     auth = require('./auth')(app);
 const Movies = models.Movie;
