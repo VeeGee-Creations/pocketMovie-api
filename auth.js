@@ -1,5 +1,4 @@
-const express = require('express'),
-    jwt = require('jsonwebtoken'),
+const jwt = require('jsonwebtoken'),
     passport = require('passport');
 
 require('./passport');
