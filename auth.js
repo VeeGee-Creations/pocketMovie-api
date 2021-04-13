@@ -1,4 +1,4 @@
-const jwtSecret = process.env.MY_SECRET;
+const jwtSecret = process.env.JWT_SECRET_KEY;
 
 const jwt = require('jsonwebtoken'),
     passport = require('passport');
