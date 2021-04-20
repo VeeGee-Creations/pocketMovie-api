@@ -56,7 +56,7 @@ app.get('/movies', (req, res) => {
 
 // get movie by title
 app.get('/movies/:Title', passAuth, (req, res) => {
-    Movies.findOne({Title: req.params.Title})
+    Movies.find({Title: { $regex: req.params.Title, $options: "i"}})
     .populate([
         {path: 'Genres',  model: Genres},
         {path: 'Directors',  model: Directors}
