@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema({
 
 //make salty hasbrowns
 userSchema.statics.hashPassword = (password) => {
-    return bcrypt.hashSync(password, 10000);
+    return bcrypt.hashSync(password, 10);
 };
 
 userSchema.methods.validatePassword = function(password) {
