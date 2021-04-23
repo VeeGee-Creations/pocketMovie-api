@@ -7,10 +7,6 @@ const express = require('express'),
 
 require('./passport');
 
-//middleware
-app.use(cors());
-
-
 const app = express();
 const models = require('./models.js'),
     auth = require('./auth')(app);
@@ -21,6 +17,8 @@ const Directors = models.Director;
 const passAuth =  passport.authenticate('jwt', {session: false});
 const PORT = process.env.PORT || 8080;
 
+//middleware
+app.use(cors());
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(express.json());
