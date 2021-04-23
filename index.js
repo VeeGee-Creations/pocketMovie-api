@@ -23,7 +23,7 @@ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAn
 });
 
 //middleware
-app.use(cors());
+app.options('*', cors());
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(express.json());
