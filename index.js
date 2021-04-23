@@ -1,10 +1,15 @@
 const express = require('express'),
     morgan = require('morgan'),
     mongoose = require('mongoose'),
-    passport = require('passport'),
     cors = require('cors'),
+    passport = require('passport'),
     {check, validationResult} = require('express-validator');
 
+    //middleware
+app.use(cors());
+app.use(morgan('common'));
+app.use(express.static('public'));
+app.use(express.json());
 require('./passport');
 
 const app = express();
@@ -21,12 +26,6 @@ const PORT = process.env.PORT || 8080;
 mongoose.connect(process.env.CONNECTION_URI, {
 useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 });
-
-//middleware
-app.use(cors());
-app.use(morgan('common'));
-app.use(express.static('public'));
-app.use(express.json());
 
 // Error catch all
 app.use((err, req, res, next) => {
