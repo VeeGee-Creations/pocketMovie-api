@@ -1,16 +1,17 @@
 const express = require('express'),
     morgan = require('morgan'),
     mongoose = require('mongoose'),
-    cors = require('cors'),
     passport = require('passport'),
+    cors = require('cors'),
     {check, validationResult} = require('express-validator');
 
-    //middleware
+require('./passport');
+
+//middleware
 app.use(cors());
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(express.json());
-require('./passport');
 
 const app = express();
 const models = require('./models.js'),

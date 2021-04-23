@@ -13,8 +13,6 @@ const generateJWTToken = (user) => {
     });
 };
 
-//middleware
-
 // POST login.
 module.exports = (router) => {
     router.post('/login', (req, res) => {
