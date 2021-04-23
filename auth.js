@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken'),
-    passport = require('passport');
+    passport = require('passport'),
+    cors = require('cors'),;
 
 require('./passport');
 
@@ -12,6 +13,9 @@ const generateJWTToken = (user) => {
         algorithm: 'HS256'
     });
 };
+
+//middleware
+app.use(cors());
 
 // POST login.
 module.exports = (router) => {
