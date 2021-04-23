@@ -9,9 +9,7 @@ require('./passport');
 
 //middleware
 app.use(cors());
-app.use(morgan('common'));
-app.use(express.static('public'));
-app.use(express.json());
+
 
 const app = express();
 const models = require('./models.js'),
@@ -22,6 +20,10 @@ const Genres = models.Genre;
 const Directors = models.Director;
 const passAuth =  passport.authenticate('jwt', {session: false});
 const PORT = process.env.PORT || 8080;
+
+app.use(morgan('common'));
+app.use(express.static('public'));
+app.use(express.json());
 
 // mongoose.connect('mongodb://localhost:27017/pocketMovies', {
 mongoose.connect(process.env.CONNECTION_URI, {
