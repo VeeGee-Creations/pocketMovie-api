@@ -10,7 +10,6 @@ const Users = models.User,
 passport.use(new LocalStrategy({
     usernameField: 'Username',
     passwordField: 'Password',
-    passReqToCallback: true
 }, (username, password, callback) => {
     console.log(`${username} ${password}`);
     Users.findOne({Username: username}, (err, user) => {
