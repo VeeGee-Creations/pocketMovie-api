@@ -45,7 +45,7 @@ app.get('/documentation', (req, res) => {
 });
 
 // get list of movies
-app.get('/movies', (req, res) => {
+app.get('/movies', passAuth, (req, res) => {
     Movies.find().populate([
         {path: 'Genres',  model: Genres},
         {path: 'Directors',  model: Directors}
