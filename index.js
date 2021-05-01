@@ -92,7 +92,7 @@ app.get('/directors/:Name', passAuth, (req, res) => {
 
 app.get('/users/profile', passAuth, (req, res) => {
     Users.findOne({Username: req.user.Username})
-    populate([{
+    .populate([{
         path: 'Favorites', model: Movies,
         populate: [
             {path: 'Directors', model: Directors},
