@@ -44,7 +44,7 @@ const directorSchema = mongoose.Schema({
     Death: String
 });
 
-const favoritesSchema = mongoos.schema([{
+const favoritesSchema = mongoose.schema([{
     type: mongoose.Schema.Types.ObjectId, ref: 'movies'
 }])
 
