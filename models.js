@@ -44,15 +44,17 @@ const directorSchema = mongoose.Schema({
     Death: String
 });
 
-const favoritesSchema = mongoose.Schema([{
+const favoriteSchema = mongoose.Schema({
+    Favorites: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'movies'
-}])
+}], ref: 'users'
+})
 
 const Movie = mongoose.model('Movie', movieSchema);
 const User = mongoose.model('User', userSchema);
 const Genre= mongoose.model('Genre', genreSchema);
 const Director = mongoose.model('Director', directorSchema);
-const Favorite = mongoose.model('Favorite', favoritesSchema);
+const Favorite = mongoose.model('Favorite', favoriteSchema);
 
 module.exports.Movie = Movie;
 module.exports.User = User;
