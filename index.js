@@ -14,6 +14,7 @@ const Movies = models.Movie;
 const Users = models.User;
 const Genres = models.Genre;
 const Directors = models.Director;
+const Favorites = models.Favorite;
 const passAuth =  passport.authenticate('jwt', {session: false});
 const PORT = process.env.PORT || 8080;
 
@@ -93,7 +94,7 @@ app.get('/directors/:Name', passAuth, (req, res) => {
 app.get('/users/profile', passAuth, (req, res) => {
     Users.findOne({Username: req.user.Username})
     .populate({
-        path: 'Favorites'
+        path: 'Favorites', model: Favorites
     })
     //     populate: [{path: 'Directors', model: Directors}, {path: 'Genres', model: Genres}]
     // })
