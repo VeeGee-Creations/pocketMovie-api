@@ -93,7 +93,7 @@ app.get('/directors/:Name', passAuth, (req, res) => {
 app.get('/users/profile', passAuth, (req, res) => {
     Users.findOne({Username: req.user.Username})
     .populate({
-        path: 'Favorites', model: User
+        path: 'Favorites', model: Users
     })
     //     populate: [{path: 'Directors', model: Directors}, {path: 'Genres', model: Genres}]
     // })
