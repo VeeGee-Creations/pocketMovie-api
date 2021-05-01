@@ -43,7 +43,6 @@ userSchema.methods.validatePassword = function(password) {
 };
 
 userSchema.plugin(beautifyUnique);
-userSchema.plugin(require('mongoose-autopopulate'));
 
 
 const Movie = mongoose.model('Movie', movieSchema);

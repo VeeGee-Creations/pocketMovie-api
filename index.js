@@ -23,7 +23,6 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(express.json());
 
-// mongoose.connect('mongodb://localhost:27017/pocketMovies', {
 mongoose.connect(process.env.CONNECTION_URI, {
 useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 });
