@@ -52,7 +52,7 @@ const Movie = mongoose.model('Movie', movieSchema);
 const User = mongoose.model('User', userSchema);
 const Genre= mongoose.model('Genre', genreSchema);
 const Director = mongoose.model('Director', directorSchema);
-const Director = mongoose.model('Favorite', favoritesSchema);
+const Favorite = mongoose.model('Favorite', favoritesSchema);
 
 module.exports.Movie = Movie;
 module.exports.User = User;
