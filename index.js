@@ -90,8 +90,8 @@ app.get('/directors/:Name', passAuth, (req, res) => {
 
 // get user profile
 
-app.get('/users/profile', passAuth, async (req, res) => {
-    await Users.findOne({Username: req.user.Username})
+app.get('/users/profile', passAuth, (req, res) => {
+    Users.findOne({Username: req.user.Username})
     .populate({
         path: 'Favorites', model: Movies,
         populate: [
