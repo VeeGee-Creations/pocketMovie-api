@@ -93,9 +93,10 @@ app.get('/directors/:Name', passAuth, (req, res) => {
 app.get('/users/profile', passAuth, (req, res) => {
     Users.findOne({Username: req.user.Username})
     .populate([{
-        path: 'Favorites', model: Movies,
-        populate: [{path: 'Directors', model: Directors}, {path: 'Genres', model: Genres}]
-    }])
+        path: 'Favorites', model: Movies
+    }]
+        .populate([{path: 'Directors', model: Directors}, {path: 'Genres', model: Genres}])
+    )
     .then((user) => res.json(user))
     .catch((err) => res.status(500).send(`Error: ${err}`));
 });
