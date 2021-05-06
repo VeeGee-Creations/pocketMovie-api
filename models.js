@@ -1,12 +1,24 @@
 const mongoose = require('mongoose'),
-    bcrypt = require('bcrypt'),
-    beautifyUnique = require('mongoose-beautiful-unique-validation');
+bcrypt = require('bcrypt'),
+beautifyUnique = require('mongoose-beautiful-unique-validation');
+
+const genreSchema = mongoose.Schema({
+    Name: String,
+    Description: String
+});
+
+const directorSchema = mongoose.Schema({
+    Name: String,
+    Bio: String,
+    Birth: String,
+    Death: String
+});
 
 const movieSchema = mongoose.Schema({
     Title: {type: String, required: true},
     Synopsis: {type: String, required: true},
-    Directors: [{type: mongoose.Schema.Types.ObjectId, ref: 'directors'}],
-    Genres: [{type: mongoose.Schema.Types.ObjectId, ref: 'genres'}],
+    Directors: [{type: mongoose.Schema.Types.ObjectId, ref: 'Director'}],
+    Genres: [{type: mongoose.Schema.Types.ObjectId, ref: 'Genre'}],
     Actors: [String],
     ImaagePath: String,
     Featured: Boolean,
@@ -18,7 +30,7 @@ const userSchema = mongoose.Schema({
     Password: {type: String, required: [true, 'Password is required']},
     Email: {type: String, required: [true, 'Email is required'], unique: '({VALUE}) is already registered'},
     Birthday: Date,
-    Favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'movies'}]
+    Favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movie'}]
 });
 
 //make salty hasbrowns
@@ -32,17 +44,6 @@ userSchema.methods.validatePassword = function(password) {
 
 userSchema.plugin(beautifyUnique);
 
-const genreSchema = mongoose.Schema({
-    Name: String,
-    Description: String
-});
-
-const directorSchema = mongoose.Schema({
-    Name: String,
-    Bio: String,
-    Birth: String,
-    Death: String
-});
 
 const Movie = mongoose.model('Movie', movieSchema);
 const User = mongoose.model('User', userSchema);
