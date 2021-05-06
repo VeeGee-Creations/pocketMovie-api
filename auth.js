@@ -27,7 +27,6 @@ module.exports = (router) => {
             req.login(user, {session: false}, (err) => {
                 if(err) res.send(err);
 
-                const token = generateJWTToken(user.toJSON());
                 const populatedUser = user.populate({
                     path: 'Favorites', model: Movies,
                     populate: [
@@ -35,6 +34,7 @@ module.exports = (router) => {
                         {path: 'Genres', model: Genres}
                     ]
                 });
+                const token = generateJWTToken(user.toJSON());
                 return res.json({
                     populatedUser,
                     token
