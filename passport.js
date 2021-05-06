@@ -1,16 +1,16 @@
 const passport = require('passport')
     LocalStrategy = require('passport-local').Strategy,
     models = require('./models.js'),
-    passportJWT = require('passport-jwt'),
-    mongoose = require('mongoose');
+    passportJWT = require('passport-jwt');
+    // mongoose = require('mongoose');
 
 const Users = models.User,
     JWTStrategy = passportJWT.Strategy,
     ExtractJWT = passportJWT.ExtractJwt;
 
-const Movies = models.Movie;
-const Genres = models.Genre;
-const Directors = models.Director;
+// const Movies = models.Movie;
+// const Genres = models.Genre;
+// const Directors = models.Director;
 
 passport.use(new LocalStrategy({
     usernameField: 'Username',
@@ -35,13 +35,14 @@ passport.use(new LocalStrategy({
 
         console.log('finished');
         return callback(null, user);
-    }).populate({
-        path: 'Favorites', model: Movies,
-        populate: [
-            {path: 'Directors', model: Directors},
-            {path: 'Genres', model: Genres}
-        ]
-    });
+    })
+    // .populate({
+    //     path: 'Favorites', model: Movies,
+    //     populate: [
+    //         {path: 'Directors', model: Directors},
+    //         {path: 'Genres', model: Genres}
+    //     ]
+    // });
 }));
 
 passport.use(new JWTStrategy({
