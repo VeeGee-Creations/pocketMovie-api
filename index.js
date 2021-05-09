@@ -18,7 +18,7 @@ const passAuth =  passport.authenticate('jwt', {session: false});
 const PORT = process.env.PORT || 8080;
 
 const corsOptions = {
-    origin: process.env.CORS_WHITELIST,
+    origin: '*',
     optionsSuccessStatus: 200,
     methods: 'GET, PUT, POST, DELETE, OPTIONS'
 }
