@@ -24,10 +24,10 @@ const corsOptions = {
 }
 
 //middleware
+app.use(cors(corsOptions));
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(express.json());
-// app.use(cors(corsOptions));
 
 mongoose.connect(process.env.CONNECTION_URI, {
 useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
