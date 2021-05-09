@@ -14,6 +14,11 @@ const generateJWTToken = (user) => {
     });
 };
 
+const corsOptions = {
+    origin: 'https://pocket-movies.netlify.app',
+    optionsSuccessStatus: 200,
+    methods: 'GET, PUT, POST, DELETE, OPTIONS'
+}
 
 // POST login.
 module.exports = (router) => {
