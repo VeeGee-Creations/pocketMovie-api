@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 8080;
 
 //middleware
 app.use(cors({
-    origin: process.env.CORS_WHITELIST
+    origin: 'https://pocket-movies.netlify.app/'
 }));
 app.use(morgan('common'));
 app.use(express.static('public'));
