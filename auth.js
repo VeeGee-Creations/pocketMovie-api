@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken'),
     passport = require('passport');
+const cors = require('cors');
 
 require('./passport');
 
@@ -13,9 +14,10 @@ const generateJWTToken = (user) => {
     });
 };
 
+
 // POST login.
 module.exports = (router) => {
-    router.post('/login', (req, res) => {
+    router.post('/login', cors(corsOptions), (req, res) => {
         passport.authenticate('local', {session: false}, (err, user, info) => {
             if(err || !user) {
                 return res.status(400).json({
