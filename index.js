@@ -80,6 +80,12 @@ app.get('/directors', passAuth, (req, res) => {
     .catch((err) => res.status(500).send(`Error: ${err}`));
 });
 
+// get list of genres
+app.get('/genres', passAuth, (req, res) => {
+    Genres.find().then((genre) => res.json(genre))
+    .catch((err) => res.status(500).send(`Error: ${err}`));
+});
+
 // get director by name
 app.get('/directors/:Name', passAuth, (req, res) => {
     Directors.find({Name: req.params.Name})
