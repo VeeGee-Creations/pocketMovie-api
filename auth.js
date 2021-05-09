@@ -15,7 +15,7 @@ const generateJWTToken = (user) => {
 };
 
 const corsOptions = {
-    origin: 'https://pocket-movies.netlify.app',
+    origin: process.env.CORS_WHITELIST,
     optionsSuccessStatus: 200,
     methods: 'GET, PUT, POST, DELETE, OPTIONS'
 }
