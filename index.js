@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 8080;
 const corsOptions = {
     origin: process.env.CORS_WHITELIST,
     optionsSuccessStatus: 200,
-    methods: 'GET, PUT, POST, DELETE'
+    methods: 'GET, PUT, POST, DELETE, OPTIONS'
 }
 
 //middleware
