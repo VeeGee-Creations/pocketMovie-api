@@ -18,7 +18,7 @@ const passAuth =  passport.authenticate('jwt', {session: false});
 const PORT = process.env.PORT || 8080;
 
 //middleware
-app.use(cors());
+app.use(cors(process.env.CORS_WHITELIST));
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(express.json());
