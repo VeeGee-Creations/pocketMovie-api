@@ -5,8 +5,14 @@ const express = require('express'),
     cors = require('cors'),
     {check, validationResult} = require('express-validator');
 
-require('./passport');
+    require('./passport');
 
+    const corsOptions = {
+        origin: 'https://pocket-movies.netlify.app',
+        optionsSuccessStatus: 200,
+        methods: 'GET, PUT, POST, DELETE, OPTIONS'
+    }
+    
 const app = express();
 const models = require('./models.js'),
     auth = require('./auth')(app);
@@ -17,19 +23,13 @@ const Directors = models.Director;
 const passAuth =  passport.authenticate('jwt', {session: false});
 const PORT = process.env.PORT || 8080;
 
-const corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200,
-    methods: 'GET, PUT, POST, DELETE, OPTIONS'
-}
 
 //middleware
-// app.use(cors(corsOptions));
-app.use(function(req, res, next) {
+app.use(cors(corsOptions), ((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "https://pocket-movies.netlify.app");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
-});
+}));
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(express.json());
