@@ -17,10 +17,14 @@ const Directors = models.Director;
 const passAuth =  passport.authenticate('jwt', {session: false});
 const PORT = process.env.PORT || 8080;
 
+const corsOptions = {
+    origin: process.env.CORS_WHITELIST,
+    optionsSuccessStatus: 200,
+    methods: 'GET, PUT, POST, DELETE'
+}
+
 //middleware
-app.use(cors({
-    origin: 'https://pocket-movies.netlify.app/'
-}));
+app.use(cors(corsOptions));
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(express.json());
