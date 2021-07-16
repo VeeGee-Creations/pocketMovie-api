@@ -2,21 +2,21 @@ const passport = require('passport')
     LocalStrategy = require('passport-local').Strategy,
     models = require('./models.js'),
     passportJWT = require('passport-jwt');
-    // mongoose = require('mongoose');
 
 const Users = models.User,
     JWTStrategy = passportJWT.Strategy,
     ExtractJWT = passportJWT.ExtractJwt;
 
-// const Movies = models.Movie;
-// const Genres = models.Genre;
-// const Directors = models.Director;
-
+/**
+ * checks for username and validates password
+ * @param {string} username
+ * @param {string} password
+ * @default
+ */
 passport.use(new LocalStrategy({
     usernameField: 'Username',
     passwordField: 'Password',
-}, (username, password, callback) => {
-    console.log(`${username} ${password}`);
+}, (username, password, callback) => { 
     Users.findOne({Username: username}, (err, user) => {
         if(err) {
             console.log(err);
@@ -35,16 +35,14 @@ passport.use(new LocalStrategy({
 
         console.log('finished');
         return callback(null, user);
-    })
-    // .populate({
-    //     path: 'Favorites', model: Movies,
-    //     populate: [
-    //         {path: 'Directors', model: Directors},
-    //         {path: 'Genres', model: Genres}
-    //     ]
-    // });
+    });
 }));
 
+/**
+ * validate bearer token
+ * @param {string} jwtPayload
+ * @param callback
+ */
 passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.JWT_SECRET_KEY

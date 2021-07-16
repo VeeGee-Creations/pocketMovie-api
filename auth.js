@@ -14,14 +14,32 @@ const generateJWTToken = (user) => {
     });
 };
 
+/**
+ * cors options
+ * @constant
+ * @type {object}
+ * @default
+ */
 const corsOptions = {
     origin: process.env.CORS_WHITELIST,
     optionsSuccessStatus: 200,
     methods: 'GET, PUT, POST, DELETE, OPTIONS'
 }
 
-// POST login.
+/**
+ * login authentication
+ * @module login/authentication
+ * @param {*} router 
+ */
 module.exports = (router) => {
+
+    /**
+ * /login endpoint
+ * method: post
+ * authenticates user credentials
+ * @param {express.request} req
+ * @param {express.response} res
+ */
     router.post('/login', cors(corsOptions), (req, res) => {
         passport.authenticate('local', {session: false}, (err, user, info) => {
             if(err || !user) {
