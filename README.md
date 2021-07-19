@@ -16,7 +16,6 @@ Includes endpoints for user registration and login.
 -  passport-local: ^1.0.0
 
 ## Endpoints
-
 | Endpoint | Method | Response | Parameters |
 | :------: | :----: | :------: | :--------: |
 | / | GET | Static HTML | N/A |
@@ -32,9 +31,7 @@ Includes endpoints for user registration and login.
 | /users | DELETE | String | N/A |
 
 ## Response Examples
-
 ### GET Movies Example
-
 ```javascript
 [
     {
@@ -71,7 +68,6 @@ Includes endpoints for user registration and login.
 ```
 
 ### Get Directors Example Response
-
 ```javascript
 [
     {
@@ -84,7 +80,6 @@ Includes endpoints for user registration and login.
 ```
 
 ### GET Profile Example
-
 ```javascript
 [
     {
@@ -198,19 +193,16 @@ Includes endpoints for user registration and login.
 ```
 
 ### String Responses
-
 String responses will announce either the current issue or the success of your request. All requests are accompanied by a corresponding HTML status code.  
 
 Example 1: user6 was deleted  
 Example 2: Error: ValidationError: Email: (user6@email.com) is already registered  
 
 ## Users
-
 POST to '/users' will create a new user  
 PUT to '/users' will allow you to update user information  
 
 ### Expected JSON Format:
-
 ```javascript
 {
     "Username": "user7",
@@ -223,13 +215,11 @@ POST to 'users/Favorites/push/:MovieID' will add movie to users favorites list
 POST to 'users/Favorites/pull/:MovieID' will remove movie from user favorites list  
 
 ## Movies
-
 GET to '/movies' will return all movies  
 GET to '/movies/:Title' will return movies by title  
 GET to '/featured' will return featured movies  
 
 ## Directors
-
 GET to '/directors' will return all directors  
 GET to '/directors/:Name' will return directors by name
 
@@ -237,11 +227,7 @@ GET to '/directors/:Name' will return directors by name
 * Verify Node is installed by typing ```node -v``` in your terminal.  
 This should print the version number so you’ll see something like this ```v12.18.1```
   * If the command is unrecognized, download and install node from [nodjs.org](https://nodejs.org/en/download/)
-* Install Expo Command Line  
-```npm install expo-cli --global```
 
 ## To Install Clone
-
 Open the terminal in the project folder and run
 ```npm install```
-
